@@ -40,21 +40,24 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/btn_reset"
+            android:id="@+id/btn_init"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
+            android:backgroundTint="#A5B3EC"
             android:text="초기화"/>
         <Button
-            android:id="@+id/btn_input"
+            android:id="@+id/btn_insert"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
+            android:backgroundTint="#A5B3EC"
             android:text="입력"/>
         <Button
             android:id="@+id/btn_select"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="#A5B3EC"
             android:text="조회"/>
     </LinearLayout>
     <LinearLayout
@@ -62,11 +65,13 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
         <EditText
+            android:id="@+id/edit3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#BFFF7F"/>
         <EditText
+            android:id="@+id/edit4"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"

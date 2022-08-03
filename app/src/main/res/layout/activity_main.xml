@@ -41,21 +41,35 @@
         android:orientation="horizontal">
         <Button
             android:id="@+id/btn_init"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="5dp"
             android:backgroundTint="#A5B3EC"
             android:text="초기화"/>
         <Button
             android:id="@+id/btn_insert"
-            android:layout_width="wrap_content"
+            android:layout_width="65dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="5dp"
             android:backgroundTint="#A5B3EC"
             android:text="입력"/>
         <Button
+            android:id="@+id/btn_update"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#A5B3EC"
+            android:layout_marginRight="5dp"
+            android:text="수정"/>
+        <Button
+            android:id="@+id/btn_delete"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#A5B3EC"
+            android:layout_marginRight="5dp"
+            android:text="삭제"/>
+        <Button
             android:id="@+id/btn_select"
-            android:layout_width="wrap_content"
+            android:layout_width="65dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#A5B3EC"
             android:text="조회"/>

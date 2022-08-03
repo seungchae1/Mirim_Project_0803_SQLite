@@ -1,8 +1,10 @@
 package kr.hs.emirim.s2125.mirim_project_0803_sqlite;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
     DBHelper dbHelper;
     EditText editName , editCnt , editResultName, editResultCnt;
+    Button btnSelect;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,10 +30,14 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnInit = findViewById(R.id.btn_init);
         Button btnInsert = findViewById(R.id.btn_insert);
-        Button btnSelect = findViewById(R.id.btn_select);
+        btnSelect = findViewById(R.id.btn_select);
+        Button btnUpdate = findViewById(R.id.btn_update);
+        Button btnDelete = findViewById(R.id.btn_delete);
         btnInit.setOnClickListener(btnListener);
         btnInsert.setOnClickListener(btnListener);
         btnSelect.setOnClickListener(btnListener);
+        btnUpdate.setOnClickListener(btnListener);
+        btnDelete.setOnClickListener(btnListener);
 
         dbHelper = new DBHelper(this);
     }
@@ -70,11 +77,38 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "새로운 IDOL 정보가 추가되었습니다.",Toast.LENGTH_SHORT).show();
                     editName.setText("");
                     editCnt.setText("");
+                    btnSelect.callOnClick();
+                    break;
+                case R.id.btn_update:
+                    db = dbHelper.getWritableDatabase();
+                    db.execSQL("update idolTBL set cnt = "+editCnt.getText().toString()+" where name='"+editName.getText().toString()+"';");
+                    editName.setText("");
+                    editCnt.setText("");
+                    btnSelect.callOnClick();
+                    db.close();
+                    break;
+                case R.id.btn_delete:
+                    AlertDialog.Builder dlg = new AlertDialog.Builder(MainActivity.this);
+                    dlg.setTitle("삭제");
+                    dlg.setMessage("정말 삭제하시겠습니까?");
+                    dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            db = dbHelper.getReadableDatabase();
+                            db.execSQL("delete from idolTBL where name='"+editName.getText().toString()+"';");
+                            editName.setText("");
+                            editCnt.setText("");
+                            btnSelect.callOnClick();
+                            db.close();
+                        }
+                    });
+                    dlg.setNegativeButton("취소",null);
+                    dlg.show();
                     break;
                 case R.id.btn_select:
                     db = dbHelper.getReadableDatabase();
 
-                    Cursor c = db.rawQuery("select * from idolTBL;",null); //select문에는 rawQuery
+                    Cursor c = db.rawQuery("select * from idolTBL;",null);
                     String strName = "아이돌명\r\n_______________\r\n";
                     String strCnt = "인원수\r\n_______________\r\n";
 
